@@ -24,6 +24,15 @@ No hard-coded Q&A pairs: the topic tiles/starter chips only pre-fill a question,
 - Input validation, per-IP rate limiting, friendly error messages
 - Responsive (desktop, tablet, phone), keyboard-accessible
 
+## Deploy to Cloudflare Pages
+1. In Cloudflare, create a Pages project named `campus-helpdesk` and connect the `FusionProGamer/60mins` GitHub repository. Use `main` as the production branch and leave the root directory blank.
+2. Keep the build command blank and set the build output directory to `static`. The included `wrangler.jsonc` declares this output directory and the Pages project name.
+3. In the Pages project, open **Settings → Variables and Secrets** and add `GEMINI_API_KEY` as an encrypted secret for production (and preview too, if you want preview deployments to answer questions). Do not add the key to `wrangler.jsonc`, GitHub, or browser code.
+4. Optionally add `GEMINI_MODEL` as a regular environment variable. It defaults to `gemini-3.8-flash`.
+5. Trigger a deployment. The site serves from `/`, and the Pages Functions provide `/api/chat` and `/api/health`.
+
+The Gemini API key stays in the Pages Function environment and is sent only in a server-to-server request to Google. For production, configure an appropriate Cloudflare rate-limiting rule for `/api/chat`.
+
 ## Run locally
 ### Windows (PowerShell)
 ```bash
@@ -54,6 +63,7 @@ Open http://127.0.0.1:5000. Create a Gemini API key in Google AI Studio. The key
 ## Tests
 ```bash
 python -m unittest discover -s tests -v
+node --test tests/test_pages_function.mjs
 ```
 
 ## Test queries
@@ -69,7 +79,9 @@ python -m unittest discover -s tests -v
 ```
 app.py          Flask server, /api/chat endpoint, prompt + validation
 knowledge.py    Sample university information
+functions/      Cloudflare Pages API routes
 static/         index.html, style.css, app.js (no build step)
+wrangler.jsonc  Cloudflare Pages project and static output configuration
 ```
 
 ## AI tools disclosure
