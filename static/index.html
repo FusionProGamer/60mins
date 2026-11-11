@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Campus Helpdesk · Presidency University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#fff"/><path d="M8 28c4-1 8-1 12 1 4-2 8-2 12-1V12c-4-1-8-1-12 1-4-2-8-2-12-1z" fill="#0e2455"/><path d="M20 13v16" stroke="#fff" stroke-width="1.6"/></svg>
+    <div><strong>Presidency University</strong><span>School of Computer Science &amp; Engineering</span></div>
+  </div>
+  <div class="who">Campus Helpdesk</div>
+</header>
+
+<main class="layout">
+  <aside class="rail" aria-label="Topics">
+    <h2>Browse by topic</h2>
+    <nav id="topics"></nav>
+    <p class="rail-note">Answers come from the sample university information only. For anything it doesn't cover, the helpdesk will say so.</p>
+  </aside>
+
+  <section class="chat" aria-label="Chat with the helpdesk">
+    <div class="chat-head">
+      <div>
+        <h1>Ask the Campus Helpdesk</h1>
+        <p>Academics, examinations, placements, hostel, library and administration.</p>
+      </div>
+      <button id="clear" class="ghost" type="button">Clear chat</button>
+    </div>
+
+    <div id="log" class="log" role="log" aria-live="polite">
+      <div id="welcome" class="welcome">
+        <h2>What do you need help with?</h2>
+        <p>Type a question in your own words, or start with one of these.</p>
+        <div id="starters" class="starters"></div>
+      </div>
+    </div>
+
+    <form id="form" class="composer" autocomplete="off">
+      <label for="q" class="sr">Your question</label>
+      <input id="q" type="text" maxlength="500" placeholder="For example: Whom should I contact for placement training?" required>
+      <button id="send" type="submit">Send</button>
+    </form>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
